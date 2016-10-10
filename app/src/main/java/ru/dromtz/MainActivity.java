@@ -3,6 +3,7 @@ package ru.dromtz;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ArrayAdapter<String> adapter;
     private SharedPreferences preferences;
+    private Resources res = this.getResources();
 
     private List<String> linkList = new ArrayList<>();
 
@@ -45,13 +47,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editText = (EditText) findViewById(R.id.editText);
+
         button = (Button) findViewById(R.id.button);
+        button.setText(res.getString(R.string.button));
+
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        listView = (ListView) findViewById(R.id.listView);
-
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-
         progressBar.setVisibility(View.GONE);
+
+        listView = (ListView) findViewById(R.id.listView);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
 
         button.setEnabled(false);
         button.setOnClickListener(new View.OnClickListener() {
